@@ -3,18 +3,19 @@ Finetune a pretrained gpt2 model on a custom dataset.
     Original Paper and repository here: https://github.com/openai/gpt-2
     Adapted from code by nshepperd: https://github.com/nshepperd/gpt-2/blob/finetuning/train.py
 """
-import os
-import tqdm
-import time
 import argparse
-import torch
+import os
+import time
 
-from GPT2.model import GPT2LMHeadModel
-from GPT2.utils import load_weight
+import torch
+import tqdm
+
 from GPT2.config import get_config
-from GPT2.sample import sample_sequence
-from GPT2.encoder import get_encoder
 from GPT2.data import load_dataset, Sampler
+from GPT2.encoder import get_encoder
+from GPT2.model import GPT2LMHeadModel
+from GPT2.sample import sample_sequence
+from GPT2.utils import load_weight
 
 FINETUNED_DIR = 'finetuned_models'
 CHECKPOINT_DIR = os.path.join(FINETUNED_DIR, 'checkpoint')
@@ -39,7 +40,6 @@ def load_model(model, state_dict, device):
 
 
 def get_latest_ckpt(ckpt_run_dir):
-
     if not os.path.isdir(ckpt_run_dir):
         return None
 
@@ -178,7 +178,7 @@ def main():
             'counter': counter,
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict()
-            }, save_path)
+        }, save_path)
 
     def generate_samples():
         """Generate unconditional samples."""
@@ -258,6 +258,7 @@ def main():
     except KeyboardInterrupt:
         print('interrupt')
         save()
+
 
 if __name__ == '__main__':
     main()

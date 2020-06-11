@@ -2,8 +2,9 @@
 Module to deal with loading text data and sampling from it.
 """
 import glob
-import numpy as np
 import os
+
+import numpy as np
 import tqdm
 
 
@@ -84,7 +85,8 @@ class Sampler(object):
         self.rs = np.random.RandomState(seed=seed)
 
     def sample(self, length):
-        assert length < self.total_size // len(self.chunks), "Dataset files are too small to sample {} tokens at a time".format(length)
+        assert length < self.total_size // len(
+            self.chunks), "Dataset files are too small to sample {} tokens at a time".format(length)
 
         while True:
             index = self.rs.randint(0, self.total_size - length - 1)

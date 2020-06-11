@@ -1,19 +1,21 @@
-'''
+"""
     code by TaeHwan Jung(@graykode)
     Original Paper and repository here : https://github.com/openai/gpt-2
     GPT2 Pytorch Model : https://github.com/huggingface/pytorch-pretrained-BERT
-'''
-import os
-import sys
-import torch
-import random
+"""
 import argparse
+import os
+import random
+import sys
+
 import numpy as np
-from GPT2.model import (GPT2LMHeadModel)
-from GPT2.utils import load_weight
+import torch
+
 from GPT2.config import get_config
-from GPT2.sample import sample_sequence
 from GPT2.encoder import get_encoder
+from GPT2.model import (GPT2LMHeadModel)
+from GPT2.sample import sample_sequence
+from GPT2.utils import load_weight
 
 
 def text_generator(state_dict, config):
@@ -72,6 +74,7 @@ def text_generator(state_dict, config):
             if args.quiet is False:
                 print("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
             print(text)
+
 
 if __name__ == '__main__':
     model_name = '117M'
