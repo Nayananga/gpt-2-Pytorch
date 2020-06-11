@@ -7,6 +7,7 @@ import torch
 import torch.nn.functional as F
 from tqdm import trange
 
+
 def top_k_logits(logits, k):
     if k == 0:
         return logits
@@ -14,7 +15,9 @@ def top_k_logits(logits, k):
     min_values = values[:, -1]
     return torch.where(logits < min_values, torch.ones_like(logits, dtype=logits.dtype) * -1e10, logits)
 
-def sample_sequence(model, length, start_token=None, batch_size=None, context=None, temperature=1, top_k=0, device='cuda', sample=True):
+
+def sample_sequence(model, length, start_token=None, batch_size=None, context=None, temperature=1, top_k=0,
+                    device='cuda', sample=True):
     if start_token is None:
         assert context is not None, 'Specify exactly one of start_token and context!'
         context = torch.tensor(context, device=device, dtype=torch.long).unsqueeze(0).repeat(batch_size, 1)
