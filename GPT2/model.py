@@ -1,8 +1,8 @@
-'''
+"""
     code by TaeHwan Jung(@graykode)
     Original Paper and repository here : https://github.com/openai/gpt-2
     GPT2 Pytorch Model : https://github.com/huggingface/pytorch-pretrained-BERT
-'''
+"""
 import copy
 import math
 
@@ -215,6 +215,6 @@ class GPT2LMHeadModel(nn.Module):
         lm_logits = self.lm_head(hidden_states)
         if lm_labels is not None:
             loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
-            loss = loss_fct(lm_logits.view(-1, lm_logits.size(-1)), lm_labels.view(-1))
+            loss = loss_fct(lm_logits.view(-1, lm_logits.size(-1)), lm_labels.contiguous().view(-1))
             return loss
         return lm_logits, presents
